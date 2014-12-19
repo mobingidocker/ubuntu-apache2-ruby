@@ -21,6 +21,7 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY config /config
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY Gemfile /root/bootstrapgems/Gemfile
+COPY sudoers /etc/sudoers
 
 ADD run.sh /run.sh
 RUN chmod 755 /*.sh
