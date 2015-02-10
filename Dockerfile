@@ -28,7 +28,5 @@ ADD startup.sh /startup.sh
 
 RUN chmod 755 /*.sh
 
-RUN cd /root/bootstrapgems && bundle install
-
 EXPOSE 22 80
 CMD ["/run.sh"]
