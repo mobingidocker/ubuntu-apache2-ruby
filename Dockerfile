@@ -24,6 +24,8 @@ COPY Gemfile /root/bootstrapgems/Gemfile
 COPY sudoers /etc/sudoers
 
 ADD run.sh /run.sh
+ADD startup.sh /startup.sh
+
 RUN chmod 755 /*.sh
 
 RUN cd /root/bootstrapgems && bundle install
