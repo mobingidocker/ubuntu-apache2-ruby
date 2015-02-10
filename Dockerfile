@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 MAINTAINER david.siaw@mobingi.com
 
 RUN apt-get update
-RUN apt-get install -y supervisor
+RUN apt-get install -y supervisor git
 RUN mkdir -p /var/log/supervisor
 
 RUN apt-get install -y openssh-server
