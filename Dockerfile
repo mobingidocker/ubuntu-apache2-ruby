@@ -3,7 +3,7 @@ MAINTAINER david.siaw@mobingi.com
 
 ADD provision.sh /provision.sh
 
-RUN /provision.sh
+RUN bash /provision.sh
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY config /config
