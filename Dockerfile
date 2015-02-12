@@ -1,21 +1,9 @@
 FROM ubuntu:14.04
 MAINTAINER david.siaw@mobingi.com
 
-RUN apt-get update
-RUN apt-get install -y supervisor git zlib1g-dev libmysqlclient-dev libpq-dev
-RUN mkdir -p /var/log/supervisor
+ADD provision.sh /provision.sh
 
-RUN apt-get install -y openssh-server
-RUN mkdir -p /var/run/sshd
-
-RUN apt-get install -y apache2
-RUN mkdir -p /var/lock/apache2 /var/run/apache2
-
-RUN apt-get install -y ruby rails libapache2-mod-passenger libsqlite3-dev
-RUN apt-get install -y nodejs
-
-RUN a2enmod rewrite
-RUN a2enmod passenger
+RUN /provision.sh
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY config /config

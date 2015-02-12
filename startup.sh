@@ -1,5 +1,12 @@
 #!/bin/bash
 
+echo "Install Ruby 2.1.0"
+rbenv install 2.1.0
+rbenv global 2.1.0
+ 
+echo "Ruby Rehash"
+rbenv rehash
+
 echo "Create Rails Directory"
 mkdir -p /srv/rails
 cp -r /srv/code /srv/rails/app
