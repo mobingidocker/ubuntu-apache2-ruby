@@ -27,6 +27,7 @@ chmod 666 log/production.log
 chown -R www-data:www-data /srv/rails/app/log/
 
 echo "Running bundler..."
+bundle install 2>&1 >> /var/log/bundler.log
 bundle install --deployment 2>&1 >> /var/log/bundler.log
 
 echo "Migrate database"
