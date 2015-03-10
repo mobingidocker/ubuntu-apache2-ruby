@@ -13,12 +13,17 @@ mkdir -p /var/lock/apache2 /var/run/apache2
 apt-get install -y ruby rails libapache2-mod-passenger libsqlite3-dev
 apt-get install -y nodejs
 
-a2enmod rewrite
-a2enmod passenger
-
 #Install rbenv
 git clone git://github.com/sstephenson/rbenv.git /usr/local/rbenv
- 
+
+rbenv install 2.1.0
+
+gem install bundler
+
+rbenv global 2.1.0
+gem install passenger 
+passenger-install-apache2-module
+
 # Add rbenv to the path:
 echo '# rbenv setup' > /etc/profile.d/rbenv.sh
 echo 'export RBENV_ROOT=/usr/local/rbenv' >> /etc/profile.d/rbenv.sh
