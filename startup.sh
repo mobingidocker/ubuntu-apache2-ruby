@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /etc/profile.d/rbenv.sh
+
 echo "Ruby Rehash"
 rbenv rehash
 
