@@ -10,7 +10,7 @@ mkdir -p /var/run/sshd
 apt-get install -y apache2
 mkdir -p /var/lock/apache2 /var/run/apache2
 
-apt-get install -y ruby rails libapache2-mod-passenger libsqlite3-dev
+apt-get install -y ruby rails libsqlite3-dev
 apt-get install -y nodejs
 
 #Install rbenv
@@ -39,3 +39,4 @@ gem install passenger
 passenger-install-apache2-module
 
 gem install bundler
+

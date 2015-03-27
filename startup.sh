@@ -5,6 +5,9 @@ source /etc/profile.d/rbenv.sh
 echo "Ruby Rehash"
 rbenv rehash
 
+echo "Ruby Version:"
+ruby -v
+
 echo "Create Rails Directory"
 mkdir -p /srv/rails
 cp -r /srv/code /srv/rails/app
@@ -30,4 +33,6 @@ bundle install --deployment 2>&1 >> /var/log/bundler.log
 
 echo "Migrate database"
 bundle exec rake db:migrate RAILS_ENV="production" 2>&1 >> /var/log/migration.log
+bundle exec rake assets:precompile RAILS_ENV="production" 2>&1 >> /var/log/migration.log
+
 /usr/bin/supervisord
