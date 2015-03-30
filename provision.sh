@@ -10,7 +10,7 @@ mkdir -p /var/run/sshd
 apt-get install -y apache2
 mkdir -p /var/lock/apache2 /var/run/apache2
 
-apt-get install -y ruby rails libsqlite3-dev
+apt-get install -y ruby rails libsqlite3-dev libcurl4-openssl-dev apache2-threaded-dev libapr1-dev libaprutil1-dev
 apt-get install -y nodejs
 
 #Install rbenv
