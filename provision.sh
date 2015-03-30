@@ -14,7 +14,7 @@ apt-get install -y ruby rails libsqlite3-dev
 apt-get install -y nodejs
 
 #Install rbenv
-git clone git://github.com/sstephenson/rbenv.git /usr/local/rbenv
+git clone https://github.com/sstephenson/rbenv.git /usr/local/rbenv
 
 # Add rbenv to the path:
 echo '# rbenv setup' > /etc/profile.d/rbenv.sh
@@ -27,7 +27,7 @@ source /etc/profile.d/rbenv.sh
  
 # Install ruby-build:
 pushd /tmp
-  git clone git://github.com/sstephenson/ruby-build.git
+  git clone https://github.com/sstephenson/ruby-build.git
   cd ruby-build
   ./install.sh
 popd
