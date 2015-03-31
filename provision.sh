@@ -39,4 +39,3 @@ gem install passenger
 passenger-install-apache2-module
 
 gem install bundler
-
