@@ -1,11 +1,6 @@
 #!/bin/bash
 
-source /etc/profile.d/rbenv.sh
-
 echo "installing" > /var/log/container_status
-
-echo "Ruby Rehash"
-rbenv rehash
 
 echo "Ruby Version:"
 ruby -v
@@ -33,12 +28,19 @@ chmod 666 log/production.log
 chown -R www-data:www-data /srv/rails/app/log/
 
 echo "Running bundler..."
-bundle install 2>&1 >> /var/log/bundler.log
-bundle install --deployment 2>&1 >> /var/log/bundler.log
+bundle install --deployment -j4 --without development:test |& tee /var/log/bundler.log
 
 echo "Migrate database"
-bundle exec rake db:migrate RAILS_ENV="production" 2>&1 >> /var/log/migration.log
-bundle exec rake assets:precompile RAILS_ENV="production" 2>&1 >> /var/log/migration.log
+bundle exec rake db:migrate RAILS_ENV="production" |& tee /var/log/migration.log
+bundle exec rake assets:precompile RAILS_ENV="production" |& tee /var/log/migration.log
+
+echo "Hooking up passenger"
+
+echo LoadModule passenger_module `passenger-config --root`/buildout/apache2/mod_passenger.so >> /etc/apache2/apache2.conf
+echo \<IfModule mod_passenger.c\> >> /etc/apache2/apache2.conf
+echo PassengerRoot `passenger-config --root` >> /etc/apache2/apache2.conf
+echo PassengerDefaultRuby `which ruby` >> /etc/apache2/apache2.conf
+echo \</IfModule\> >> /etc/apache2/apache2.conf
 
 echo "complete" > /var/log/container_status
 

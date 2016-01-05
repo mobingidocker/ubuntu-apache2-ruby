@@ -8,10 +8,7 @@ RUN bash /provision.sh
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY config /config
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY Gemfile /root/bootstrapgems/Gemfile
 COPY sudoers /etc/sudoers
-
-COPY apache.conf /etc/apache2/apache2.conf
 
 ADD run.sh /run.sh
 ADD startup.sh /startup.sh
