@@ -44,4 +44,4 @@ echo \</IfModule\> >> /etc/apache2/apache2.conf
 
 echo "complete" > /var/log/container_status
 
-/usr/bin/supervisord
+exec /usr/bin/supervisord
