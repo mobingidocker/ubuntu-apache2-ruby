@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cp -a ../conf .
-cp -a ../script .
+cp -a ../conf/* .
+cp -a ../script/* .
