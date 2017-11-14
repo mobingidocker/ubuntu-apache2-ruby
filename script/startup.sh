@@ -28,14 +28,13 @@ chmod 666 log/production.log
 chown -R www-data:www-data /srv/rails/app/log/
 
 echo "Running bundler..."
-bundle install --deployment -j4 --without development:test |& tee /var/log/bundler.log
+bundle install --deployment -j4 --without development:test
 
 echo "Migrate database"
-bundle exec rake db:migrate RAILS_ENV="production" |& tee /var/log/migration.log
-bundle exec rake assets:precompile RAILS_ENV="production" |& tee /var/log/migration.log
+bundle exec rake db:migrate RAILS_ENV="production"
+bundle exec rake assets:precompile RAILS_ENV="production"
 
 echo "Hooking up passenger"
-
 echo LoadModule passenger_module `passenger-config --root`/buildout/apache2/mod_passenger.so >> /etc/apache2/apache2.conf
 echo \<IfModule mod_passenger.c\> >> /etc/apache2/apache2.conf
 echo PassengerRoot `passenger-config --root` >> /etc/apache2/apache2.conf
@@ -43,5 +42,7 @@ echo PassengerDefaultRuby `which ruby` >> /etc/apache2/apache2.conf
 echo \</IfModule\> >> /etc/apache2/apache2.conf
 
 echo "complete" > /var/log/container_status
+
+mkdir /var/log/supervisor /var/log/nginx
 
 exec /usr/bin/supervisord
