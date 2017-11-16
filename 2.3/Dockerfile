@@ -37,9 +37,9 @@ RUN wget -O ruby-install-$RUBY_INSTALL_VERSION.tar.gz https://github.com/postmod
 	&& tar -zxf ruby-install-$RUBY_INSTALL_VERSION.tar.gz
 
 WORKDIR /ruby-install-$RUBY_INSTALL_VERSION
-
 RUN make install
 
+WORKDIR /
 RUN ruby-install --system ruby $RUBY_VERSION -- --disable-install-rdoc
 RUN gem update --system
 RUN gem install passenger --no-ri --no-rdoc
@@ -49,8 +49,7 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY config /config
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY run.sh /run.sh
-COPY startup.sh /startup.sh
 
-RUN chmod 755 /*.sh
+RUN chmod 755 /run.sh
 
 CMD ["/run.sh"]
